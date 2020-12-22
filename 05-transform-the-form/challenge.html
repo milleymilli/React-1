@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="utf-8" />
+  <title>05 Transform the form | FAC React</title>
+
+  <body>
+    <!-- These scripts will make React and ReactDOM globally available. -->
+    <script src="./../assets/react@16.9.0/umd/react.development.js"></script>
+    <script src="./../assets/react-dom@16.9.0/umd/react-dom.development.js"></script>
+    <!-- This will let us write JSX and ES6 in a script tag with a special type of "text/babel" -->
+    <script src="./../assets/babel-standalone@7.6.0/babel.js"></script>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const root = document.getElementById("root");
+      
+      function TempConverter() {
+        const [tem, setTem] = React.useState('');
+        const [temdeg, setTemdeg] = React.useState('celecious');
+      
+        const handleTemdeghange = (event) => setTemdeg(event.target.value);
+       
+        return (
+          <form>
+            <h1>Temperature converter to:</h1>
+            
+            <label>Celesious</label>
+            <input
+              type="radio"
+              name="temdeg" // name groups the inputs
+              value="celecious"
+              checked={temdeg === "celecious"}
+              onChange={handleTemdeghange}
+            />            
+            <br/>
+            <label>Faranhaite</label>
+            <input
+              type="radio"
+              name="temdeg"
+              value="faranhaite"
+              checked={temdeg === "faranhaite"}
+              onChange={handleTemdeghange}
+            />
+            <br/>
+            <input value={tem} onChange={(event) => setTem(event.target.value)} />
+            <br/>
+            <output>Temperature is {
+              temdeg === 'celecious'? 
+              (Math.round(((tem - 32) * 5) / 9) + 'F') :
+              (Math.round((tem * 9) / 5 + 32) + 'C')}
+              </output>
+          </form>
+        );
+      }
+
+      ReactDOM.render(<TempConverter />, root);
+    </script>
+  </body>
+</html>
